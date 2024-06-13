@@ -63,7 +63,7 @@ export function CatsPage({ isAuthorized }: CatsPageProps) {
 
   useEffect(() => {
     pageChangeHandler();
-  }, [pageChangeHandler]);
+  }, [pageChangeHandler, isAuthorized]);
 
   useEffect(() => {
     loadTotalCatsCount();
