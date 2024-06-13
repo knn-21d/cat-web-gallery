@@ -4,23 +4,48 @@ import { CommentItem } from '../comment-item/comment-item';
 import styles from './comments.module.css';
 import { getFishText } from '../../../../api/fish-text';
 import { FetchTrigger } from '../../../../components/fetch-trigger/fetch-trigget';
-import { addComment } from '../../../../utils/local-storage';
+import {
+  addComment,
+  getComments,
+  removeComment,
+  updateComment,
+} from '../../../../utils/local-storage';
+import { MockedCommentType } from '../../../../api/fish-text.types';
 
 type CommentsProps = {
   postId: string;
 };
 
 export function Comments({ postId }: CommentsProps) {
-  const [comments, setComments] = useState<string[]>([]);
+  const [comments, setComments] = useState<MockedCommentType[]>([
+    ...getComments(postId),
+  ]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [editingComment, setEditingComment] = useState<MockedCommentType | null>(null);
+
   const sendCommentHandler = (comment: string) => {
-    setComments((prev) => [comment, ...prev]);
-    addComment(postId, comment);
+    const id = Date.now();
+    setComments((prev) => [{ text: comment, isOwn: true, id }, ...prev]);
+    addComment(postId, comment, id);
   };
 
+  const deleteCommentHandler = (comment: MockedCommentType) => {
+    setComments((prev) => prev.filter((c) => c.id !== comment.id));
+    removeComment(postId, comment.id);
+  };
+
+  const editCancelHandler = () => {
+    setEditingComment(null);
+  }
+
+  const editConfirmHandler = (comment: MockedCommentType) => {
+    setComments((prev) => prev.map((c) => c.id === comment.id ? comment : c));
+    setEditingComment(null);
+    updateComment(postId, comment.id, comment.text);
+  }
+
   const commentsFetchHandler = useCallback(async () => {
-    console.trace({ isLoading });
     if (isLoading) {
       return;
     }
@@ -38,7 +63,15 @@ export function Comments({ postId }: CommentsProps) {
       <CommentInput onSend={sendCommentHandler}></CommentInput>
       <div className={styles['comment-items']}>
         {comments.map((comment) => (
-          <CommentItem key={comment} comment={comment}></CommentItem>
+          <CommentItem
+            onDeleteComment={deleteCommentHandler}
+            key={comment.id}
+            comment={comment}
+            onEditComment={(comment) => setEditingComment(comment)}
+            isEdit={editingComment?.id === comment.id}
+            onEditCancel={editCancelHandler}
+            onEditConfirm={editConfirmHandler}
+          ></CommentItem>
         ))}
         <FetchTrigger
           isLoading={isLoading}

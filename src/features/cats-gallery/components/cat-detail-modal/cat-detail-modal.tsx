@@ -31,7 +31,7 @@ export function CatDetailModal({ isOpen, cat, onSetCat }: CatDetailModalProps) {
   };
 
   const getText = useCallback(async () => {
-    setDescription(await getFishText());
+    setDescription((await getFishText()).text);
   }, []);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export function CatDetailModal({ isOpen, cat, onSetCat }: CatDetailModalProps) {
             </div>
             <LikeRow id={cat._id}></LikeRow>
           </div>
-          <Comments></Comments>
+          <Comments postId={cat._id}></Comments>
         </>
       )}
     </dialog>

@@ -1,9 +1,9 @@
 import { fetchWrapper } from './fetch';
-import { FishResponse } from './fish-text.types';
+import { MockedCommentType, FishResponse } from './fish-text.types';
 
 const BASE_URl = 'https://fish-text.ru/get';
 
-export async function getFishText(): Promise<string> {
+export async function getFishText(): Promise<MockedCommentType> {
   const resp = await fetchWrapper<FishResponse>(BASE_URl);
-  return resp?.text ?? '';
+  return { text: resp?.text ?? '', isOwn: false, id: Date.now() };
 }

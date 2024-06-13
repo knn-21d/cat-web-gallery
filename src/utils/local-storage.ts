@@ -1,7 +1,9 @@
+import { MockedCommentType } from '../api/fish-text.types';
+
 type UserType = {
   login: string;
   posts?: string[];
-  comments?: Record<string, string[]>;
+  comments?: Record<string, {id: number, text: string}[]>;
   likes?: string[];
   dislikes?: string[];
 };
@@ -17,7 +19,7 @@ export function getUser(): UserType | null {
 }
 
 export function updateUser(user: Partial<UserType>): Partial<UserType> {
-  const userObj = getUser()
+  const userObj = getUser();
   if (userObj) {
     const newUser = { ...userObj, ...user };
     localStorage.setItem(USER_KEY, JSON.stringify(newUser));
@@ -66,21 +68,63 @@ export function addDislike(id: string) {
     const newDislikes = [...(user.dislikes || []), id];
     return updateUser({ dislikes: newDislikes });
   }
-} 
+}
 
 export function removeDislike(id: string) {
   const user = getUser();
   if (user) {
-    const newDislikes = (user.dislikes || []).filter((dislike) => dislike !== id);
+    const newDislikes = (user.dislikes || []).filter(
+      (dislike) => dislike !== id,
+    );
     return updateUser({ dislikes: newDislikes });
   }
-} 
+}
 
-export function addComment(postId: string, comment: string): UserType | null {
+export function addComment(postId: string, comment: string, id: number): UserType | null {
   const user = getUser();
   if (user) {
-    const newComments = { ...user.comments, [postId]: [...(user.comments?.[postId] || []), comment] };
+    const newComments = {
+      ...user.comments,
+      [postId]: [...(user.comments?.[postId] || []), {text: comment, id}],
+    };
     return updateUser({ comments: newComments }) as UserType;
   }
-  return null
+  return null;
+}
+
+export function getComments(postId: string): MockedCommentType[] {
+  const user = getUser();
+  if (user) {
+    return user.comments?.[postId]?.map((comment) => ({ ...comment, isOwn: true })) || [];
+  }
+  return [];
+}
+
+export function removeComment(postId: string, commentId: number) {
+  const user = getUser();
+  if (user) {
+    const newComments = {
+      ...user.comments,
+      [postId]: (user.comments?.[postId] || []).filter((comment) => comment.id !== commentId),
+    };
+    return updateUser({ comments: newComments }) as UserType;
+  }
+  return null;
+}
+
+export function updateComment(postId: string, commentId: number, text: string) {
+  const user = getUser();
+  if (user) {
+    const newComments = {
+      ...user.comments,
+      [postId]: (user.comments?.[postId] || []).map((comment) => {
+        if (comment.id === commentId) {
+          return { ...comment, text };
+        }
+        return comment;
+      }),
+    };
+    return updateUser({ comments: newComments }) as UserType;
+  }
+  return null;
 }
