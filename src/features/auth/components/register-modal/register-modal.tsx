@@ -138,12 +138,14 @@ export function RegisterModal({
             placeholder='password'
             onValueChange={passwordChangeHandler}
             value={passwordValue}
+            type='password'
           ></Input>
           <Input
             onValueChange={passwordConfirmationHandler}
             state={confirmPasswordError ? 'error' : 'default'}
             placeholder='confirm password'
             value={confirmPasswordValue}
+            type='password'
           ></Input>
           {passwordError === 'notMatch' &&
             confirmPasswordError === 'notMatch' && (
