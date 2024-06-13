@@ -9,6 +9,11 @@
   justify-content: space-between;
 }
 
+.link {
+  color: var(--white);
+  text-decoration: none;
+}
+
 .content {
   overflow: auto;
   min-height: calc(100vh - 84px);

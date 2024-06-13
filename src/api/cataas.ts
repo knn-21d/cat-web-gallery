@@ -15,11 +15,14 @@ export function catIdToUrl(id: string) {
 export async function getCatsPageAPI(
   page: number,
   count = DEFAULT_LIMIT,
+  tag?: string,
 ): Promise<MockedCataasCatsModel[]> {
   const { limit, skip } = pageToOffLim(page, count);
-  const cats = await fetchWrapper<CataasCatModel[]>(
-    `${BASE_URL}api/cats?limit=${limit}&skip=${skip}`,
-  );
+  let url = `${BASE_URL}api/cats?limit=${limit}&skip=${skip}`;
+  if (tag) {
+    url += `&tags=${tag}`;
+  }
+  const cats = await fetchWrapper<CataasCatModel[]>(url);
   return cats.map((cat) => ({
     ...cat,
     isOwn: Math.random() > 0.5,
@@ -29,4 +32,8 @@ export async function getCatsPageAPI(
 
 export async function getCatsCountAPI(): Promise<CataasCountModel> {
   return await fetchWrapper<CataasCountModel>(`${BASE_URL}api/count`);
+}
+
+export async function getTags(): Promise<string[]> {
+  return await fetchWrapper<string[]>(`${BASE_URL}api/tags`);
 }

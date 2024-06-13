@@ -1,9 +1,10 @@
+import { MockedCataasCatsModel } from '../api/cataas.types';
 import { MockedCommentType } from '../api/fish-text.types';
 
 type UserType = {
   login: string;
-  posts?: string[];
-  comments?: Record<string, {id: number, text: string}[]>;
+  posts?: MockedCataasCatsModel[];
+  comments?: Record<string, { id: number; text: string }[]>;
   likes?: string[];
   dislikes?: string[];
 };
@@ -80,12 +81,16 @@ export function removeDislike(id: string) {
   }
 }
 
-export function addComment(postId: string, comment: string, id: number): UserType | null {
+export function addComment(
+  postId: string,
+  comment: string,
+  id: number,
+): UserType | null {
   const user = getUser();
   if (user) {
     const newComments = {
       ...user.comments,
-      [postId]: [...(user.comments?.[postId] || []), {text: comment, id}],
+      [postId]: [...(user.comments?.[postId] || []), { text: comment, id }],
     };
     return updateUser({ comments: newComments }) as UserType;
   }
@@ -95,7 +100,12 @@ export function addComment(postId: string, comment: string, id: number): UserTyp
 export function getComments(postId: string): MockedCommentType[] {
   const user = getUser();
   if (user) {
-    return user.comments?.[postId]?.map((comment) => ({ ...comment, isOwn: true })) || [];
+    return (
+      user.comments?.[postId]?.map((comment) => ({
+        ...comment,
+        isOwn: true,
+      })) || []
+    );
   }
   return [];
 }
@@ -105,7 +115,9 @@ export function removeComment(postId: string, commentId: number) {
   if (user) {
     const newComments = {
       ...user.comments,
-      [postId]: (user.comments?.[postId] || []).filter((comment) => comment.id !== commentId),
+      [postId]: (user.comments?.[postId] || []).filter(
+        (comment) => comment.id !== commentId,
+      ),
     };
     return updateUser({ comments: newComments }) as UserType;
   }
@@ -127,4 +139,41 @@ export function updateComment(postId: string, commentId: number, text: string) {
     return updateUser({ comments: newComments }) as UserType;
   }
   return null;
+}
+
+export function getPosts(): MockedCataasCatsModel[] {
+  const user = getUser();
+  if (user) {
+    return user.posts || [];
+  }
+  return [];
+}
+
+export function addPost(post: MockedCataasCatsModel) {
+  const user = getUser();
+  if (user) {
+    const newPosts = [post, ...(user.posts || [])];
+    return updateUser({ posts: newPosts });
+  }
+}
+
+export function updatePost(post: MockedCataasCatsModel) {
+  const user = getUser();
+  if (user) {
+    const newPosts = (user.posts || []).map((p) => {
+      if (p._id === post._id) {
+        return post;
+      }
+      return p;
+    });
+    return updateUser({ posts: newPosts });
+  }
+}
+
+export function deletePost(id: string) {
+  const user = getUser();
+  if (user) {
+    const newPosts = (user.posts || []).filter((p) => p._id !== id);
+    return updateUser({ posts: newPosts });
+  }
 }

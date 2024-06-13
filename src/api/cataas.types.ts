@@ -8,6 +8,7 @@ export type CataasCatModel = {
 export type MockedCataasCatsModel = CataasCatModel & {
   isOwn: boolean;
   url: string;
+  text?: string
 };
 
 export type CataasCountModel = {

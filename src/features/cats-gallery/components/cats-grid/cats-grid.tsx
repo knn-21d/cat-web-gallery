@@ -5,12 +5,19 @@ import styles from './cats-grid.module.css';
 
 type CatsGridProps = {
   cats: MockedCataasCatsModel[];
+  onEditCat: (post: MockedCataasCatsModel) => void;
+  onDeleteCat: (post: MockedCataasCatsModel) => void
 };
 
-export function CatsGrid({ cats }: CatsGridProps) {
+export function CatsGrid({ cats, onEditCat, onDeleteCat }: CatsGridProps) {
   const [openedCat, setOpenedCat] = useState<MockedCataasCatsModel | null>(
     null,
   );
+
+  const editCatHandler = (post: MockedCataasCatsModel) => {
+    onEditCat(post);
+    setOpenedCat({...post});
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -24,9 +31,11 @@ export function CatsGrid({ cats }: CatsGridProps) {
         />
       ))}
       <CatDetailModal
+        onEditCat={editCatHandler}
         onSetCat={setOpenedCat}
         isOpen={openedCat !== null}
         cat={openedCat}
+        onDeleteCat={onDeleteCat}
       ></CatDetailModal>
     </div>
   );

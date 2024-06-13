@@ -8,6 +8,7 @@
   margin-top: auto;
   margin-bottom: auto;
   color: var(--white);
+  hyphens: auto;
 }
 
 .modal::backdrop {
@@ -35,4 +36,17 @@
 .img {
   width: 25%;
   object-fit: cover;
+}
+
+.top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
 }
