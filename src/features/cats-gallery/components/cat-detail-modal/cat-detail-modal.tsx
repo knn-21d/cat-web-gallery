@@ -10,6 +10,7 @@ import styles from './cat-detail-modal.module.css';
 import { getFishText } from '../../../../api/fish-text';
 import clsx from '../../../../utils/clsx';
 import { Comments } from '../comments/comments';
+import { LikeRow } from '../like-row/like-row';
 
 type CatDetailModalProps = {
   isOpen: boolean;
@@ -68,6 +69,7 @@ export function CatDetailModal({ isOpen, cat, onSetCat }: CatDetailModalProps) {
                 <span>{description}</span>
               </div>
             </div>
+            <LikeRow id={cat._id}></LikeRow>
           </div>
           <Comments></Comments>
         </>
