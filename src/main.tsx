@@ -1,13 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { routes } from './routes.tsx';
-
-const router = createBrowserRouter(routes);
+import { InternalLayout } from './features/cats-gallery/pages/internal-layout/internal-layout';
+import { CatsPage } from './features/cats-gallery/pages/cats-page/cats-page';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
-		<RouterProvider router={router}></RouterProvider>
-	</React.StrictMode>,
+  <InternalLayout><CatsPage></CatsPage></InternalLayout>
 );

@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.cat-img {
+    max-width: calc(25% - 16px);
+    flex: 1 0 calc(25% - 16px);
+    border-radius: 8px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}

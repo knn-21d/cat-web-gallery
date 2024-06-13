@@ -1,0 +1,19 @@
+.header {
+  height: 84px;
+  padding: 24px;
+  width: 100vw;
+  border-bottom: 1px solid var(--mid-blue);
+  background-color: var(--dark-blue);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content {
+  overflow: auto;
+  min-height: calc(100vh - 84px);
+  padding: 24px;
+  height: 100%;
+  width: 100vw;
+  background-color: var(--dark-blue);
+}

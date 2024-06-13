@@ -1,16 +1,16 @@
 .button {
-	border-radius: 8px;
-	padding: 4px 8px;
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 .default {
-    background-color: white;
-    border: 1px solid gainsboro;
-    color: gainsboro;
+  background-color: var(--white);
+  border: 1px solid var(--light-blue);
+  color: var(--light-blue);
 }
 
 .primary {
-    background-color: blue;
-    border: 1px solid white;
-    color: white;
+  background-color: var(--mid-blue);
+  border: 1px solid var(--white);
+  color: var(--white);
 }

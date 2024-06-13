@@ -1,12 +1,12 @@
 .common {
-	border-radius: 8px;
-	padding: 4px 8px;
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 .default {
-	border: 1px solid gainsboro;
+  border: 1px solid var(--white);
 }
 
 .error {
-	border: 1px solid red;
+  border: 1px solid var(--red);
 }

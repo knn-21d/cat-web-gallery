@@ -1,0 +1,38 @@
+.modal {
+  margin: auto;
+}
+
+.modal::backdrop {
+  background: black;
+  opacity: 0.75;
+}
+
+.login-wrapper {
+  display: flex;
+  width: 400px;
+  height: 400px;
+  flex-direction: column;
+  background-color: var(--light-blue);
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  align-items: center;
+}
+
+.headings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.title {
+  color: var(--mid-blue);
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

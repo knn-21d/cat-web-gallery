@@ -1,0 +1,13 @@
+.modal {
+  margin: auto;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--mid-blue);
+  background-color: var(--dark-blue);
+  color: var(--white);
+}
+
+.modal::backdrop {
+  background: black;
+  opacity: 0.75;
+}
