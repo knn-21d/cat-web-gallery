@@ -1,4 +1,4 @@
 export type FishResponse = {
-    status: string;
-    text: string;
-}
+  status: string;
+  text: string;
+};

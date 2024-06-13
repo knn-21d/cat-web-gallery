@@ -4,5 +4,7 @@ import { InternalLayout } from './features/cats-gallery/pages/internal-layout/in
 import { CatsPage } from './features/cats-gallery/pages/cats-page/cats-page';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <InternalLayout><CatsPage></CatsPage></InternalLayout>
+  <InternalLayout>
+    <CatsPage></CatsPage>
+  </InternalLayout>,
 );

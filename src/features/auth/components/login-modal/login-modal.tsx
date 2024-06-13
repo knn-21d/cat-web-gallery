@@ -79,7 +79,9 @@ export function LoginModal({ isOpen, onLogin, onClose }: LoginModalProps) {
           <Button onClick={buttonClickHandler} appType='primary'>
             Login
           </Button>
-          <Button onClick={() => setIsRegisterModalOpen(true)}>Not registered yet?</Button>
+          <Button onClick={() => setIsRegisterModalOpen(true)}>
+            Not registered yet?
+          </Button>
         </div>
       </div>
       <RegisterModal

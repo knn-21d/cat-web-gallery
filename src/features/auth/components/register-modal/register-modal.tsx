@@ -106,8 +106,8 @@ export function RegisterModal({
       return;
     }
 
-    setUser({login: userNameValue})
-    onRegister()
+    setUser({ login: userNameValue });
+    onRegister();
   };
 
   return (

@@ -1,8 +1,8 @@
 .trigger {
-    position: absolute;
-    bottom: 0;
-    height: 1px;
-    pointer-events: none;
-    width: 100%;
-    color: transparent;
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  pointer-events: none;
+  width: 100%;
+  color: transparent;
 }

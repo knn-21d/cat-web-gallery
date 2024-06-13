@@ -8,7 +8,9 @@ type CatsGridProps = {
 };
 
 export function CatsGrid({ cats }: CatsGridProps) {
-  const [openedCat, setOpenedCat] = useState<MockedCataasCatsModel | null>(null);
+  const [openedCat, setOpenedCat] = useState<MockedCataasCatsModel | null>(
+    null,
+  );
 
   return (
     <div className={styles.wrapper}>

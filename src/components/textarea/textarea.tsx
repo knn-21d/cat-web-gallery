@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import styles from './textarea.module.css'
+import styles from './textarea.module.css';
 import clsx from '../../utils/clsx';
 
 export function TextArea(
@@ -8,5 +8,7 @@ export function TextArea(
     HTMLTextAreaElement
   >,
 ) {
-    return <textarea className={clsx(props.className, styles.textarea)}></textarea>
+  return (
+    <textarea className={clsx(props.className, styles.textarea)}></textarea>
+  );
 }

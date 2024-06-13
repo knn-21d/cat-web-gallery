@@ -1,10 +1,10 @@
 import styles from './comment-item.module.css';
 
 type CommentItemProps = {
-  comment: string
-}
+  comment: string;
+};
 
-export function CommentItem({comment}: CommentItemProps) {
+export function CommentItem({ comment }: CommentItemProps) {
   return (
     <div className={styles['comment-item']}>
       <div className={styles['top-row']}>
